@@ -1,25 +1,25 @@
 const poke_container = document.getElementById("poke_container");
 const pokemons_number = 150;
 const colors = {
-	fire: "#FDDFDF",
-	grass: "#DEFDE0",
-	electric: "#FCF7DE",
-	water: "#DEF3FD",
-	ground: "#f4e7da",
-	rock: "#d5d5d4",
-	fairy: "#fceaff",
-	poison: "#98d7a5",
-	bug: "#f8d5a3",
-	dragon: "#97b3e6",
-	psychic: "#eaeda1",
-	flying: "#F5F5F5",
-	fighting: "#E6E0D4",
-	normal: "#F5F5F5",
-	ghost: "rgb(162, 71, 180);",
-	steel: "rgb(163, 163, 163)",
-	ice: "rgb(81, 218, 223)",
+	fire: "#F08030",
+	grass: "#78C850",
+	electric: "#F8D030",
+	water: "#6890F0",
+	ground: "#E0C068",
+	rock: "#B8A038",
+	fairy: "#EE99AC",
+	poison: "#A040A0",
+	bug: "#A8B820",
+	dragon: "#7038F8",
+	psychic: "#F85888",
+	flying: "#A890F0",
+	fighting: "#C03028",
+	normal: "#A8A878",
+	ghost: "#705898",
+	steel: "#B8B8D0",
+	ice: "#98D8D8",
 	shadow: "rgb(105, 66, 99)",
-	unknwon: "rgb(65, 46, 55)",
+	unknwon: "#68A090",
 };
 
 //ghost, steel, ice, dark, shadow, unknown
@@ -34,17 +34,45 @@ const getPokemon = async (id) => {
 	createPokemonCard(pokemon);
 };
 
+function assignColor(pokemonEl, color1, color2 = null) {
+	if (color2 == null) {
+		pokemonEl.style.backgroundColor = color1;
+	} else {
+		pokemonEl.style.background =
+			"linear-gradient(" + "150deg" + ", " + color1 + ", " + color2 + ")";
+	}
+}
+
 function createPokemonCard(pokemon) {
 	const pokemonEl = document.createElement("div");
 	pokemonEl.classList.add("pokemon");
 
 	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
 	const poke_types = pokemon.types.map((el) => el.type.name);
-	console.log(poke_types);
-	const type = main_types.find((type) => poke_types.indexOf(type) > -1);
-	const color = colors[type];
+	let types = "";
+	let typePlural = "";
+	let color1 = colors[poke_types[0]];
+	let color2 = "";
 
-	pokemonEl.style.backgroundColor = color;
+	if (poke_types.length > 1) {
+		types =
+			poke_types[0][0].toUpperCase() +
+			poke_types[0].slice(1) +
+			", " +
+			poke_types[1][0].toUpperCase() +
+			poke_types[1].slice(1);
+		typePlural = "Types";
+		color2 = colors[poke_types[1]];
+		assignColor(pokemonEl, color1, color2);
+	} else {
+		types = poke_types[0][0].toUpperCase() + poke_types[0].slice(1);
+		typePlural = "Type";
+		assignColor(pokemonEl, color1);
+	}
+	//const type = main_types.find((type) => poke_types.indexOf(type) > -1);
+	// const color = colors[type];
+
+	// pokemonEl.style.backgroundColor = color;
 
 	const pokeInnerHtml = `
   <div class="img-container">
@@ -53,7 +81,7 @@ function createPokemonCard(pokemon) {
    <div class="info">
       <span class="number">#${pokemon.id.toString().padStart(3, "0")}</span>
       <h3 class="name">${name}</h3>
-      <small class="type"> Type: <span>${type}</span></small>
+      <small class="type"> ${typePlural}: <span>${types}</span></small>
     </div>  
   `;
 
