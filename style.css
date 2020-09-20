@@ -39,7 +39,7 @@ header > img {
 	align-items: space-between;
 	justify-content: center;
 	margin: 0 auto;
-	width: 85%;
+	width: 90%;
 }
 
 .pokemon {
@@ -50,25 +50,21 @@ header > img {
 	margin: 10px;
 	padding: 20px;
 	text-align: center;
-	width: 170px;
-	cursor: pointer;
-}
-
-.pokemon:hover {
-	opacity: 0.6;
+	width: 180px;
 }
 
 .pokemon .img-container {
 	background-color: rgba(255, 255, 255, 0.6);
 	border-radius: 50%;
+	margin-left: 0.5rem;
 	width: 120px;
 	height: 120px;
 	text-align: center;
 }
 
 .pokemon .img-container img {
-	max-width: 90%;
-	height: 120px;
+	max-width: 95%;
+	height: 130px;
 	width: auto;
 }
 

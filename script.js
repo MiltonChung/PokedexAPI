@@ -75,14 +75,16 @@ function createPokemonCard(pokemon) {
 	// pokemonEl.style.backgroundColor = color;
 
 	const pokeInnerHtml = `
-  <div class="img-container">
-    <img src="${pokemon.sprites.other.dream_world.front_default}" />
-  </div>
-   <div class="info">
+    <div class="img-container">
+      <img src="${pokemon.sprites.other.dream_world.front_default}" />
+    </div>
+    <div class="info">
       <span class="number">#${pokemon.id.toString().padStart(3, "0")}</span>
       <h3 class="name">${name}</h3>
       <small class="type"> ${typePlural}: <span>${types}</span></small>
     </div>  
+    
+    
   `;
 
 	pokemonEl.innerHTML = pokeInnerHtml;
