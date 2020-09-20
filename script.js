@@ -22,10 +22,14 @@ const colors = {
 	unknwon: "#68A090",
 };
 
-//ghost, steel, ice, dark, shadow, unknown
-
 // Takes out the keys from the colors object
 const main_types = Object.keys(colors);
+
+const fetchPokemons = async () => {
+	for (let i = 1; i <= pokemons_number; i++) {
+		await getPokemon(i);
+	}
+};
 
 const getPokemon = async (id) => {
 	const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -34,18 +38,12 @@ const getPokemon = async (id) => {
 	createPokemonCard(pokemon);
 };
 
-function assignColor(pokemonEl, color1, color2 = null) {
-	if (color2 == null) {
-		pokemonEl.style.backgroundColor = color1;
-	} else {
-		pokemonEl.style.background =
-			"linear-gradient(" + "150deg" + ", " + color1 + ", " + color2 + ")";
-	}
-}
-
 function createPokemonCard(pokemon) {
 	const pokemonEl = document.createElement("div");
 	pokemonEl.classList.add("pokemon");
+
+	const flipEl = document.createElement("div");
+	flipEl.classList.add("flip-card-inner");
 
 	const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
 	const poke_types = pokemon.types.map((el) => el.type.name);
@@ -63,38 +61,52 @@ function createPokemonCard(pokemon) {
 			poke_types[1].slice(1);
 		typePlural = "Types";
 		color2 = colors[poke_types[1]];
-		assignColor(pokemonEl, color1, color2);
+		assignColor(flipEl, color1, color2);
 	} else {
 		types = poke_types[0][0].toUpperCase() + poke_types[0].slice(1);
 		typePlural = "Type";
-		assignColor(pokemonEl, color1);
+		assignColor(flipEl, color1);
 	}
-	//const type = main_types.find((type) => poke_types.indexOf(type) > -1);
-	// const color = colors[type];
 
-	// pokemonEl.style.backgroundColor = color;
-
+	pokemonEl.appendChild(flipEl);
 	const pokeInnerHtml = `
-    <div class="img-container">
-      <img src="${pokemon.sprites.other.dream_world.front_default}" />
-    </div>
-    <div class="info">
-      <span class="number">#${pokemon.id.toString().padStart(3, "0")}</span>
-      <h3 class="name">${name}</h3>
-      <small class="type"> ${typePlural}: <span>${types}</span></small>
-    </div>  
-    
-    
-  `;
+	 
+        <div class="flip-card-front">
+          <div class="img-container">
+            <img src="${pokemon.sprites.other.dream_world.front_default}" />
+          </div>
+          <div class="info">
+            <span class="number">#${pokemon.id
+							.toString()
+							.padStart(3, "0")}</span>
+            <h3 class="name">${name}</h3>
+            <small class="type"> ${typePlural}: <span>${types}</span></small>
+          </div>
+        </div>
 
-	pokemonEl.innerHTML = pokeInnerHtml;
+				<div class="flip-card-back">
+					<h2>Stats:</h2>
+					<ul class="stats">
+						<li><span>HP:</span> ${pokemon.stats[0].base_stat}</li>
+						<li><span>Attack:</span> ${pokemon.stats[1].base_stat}</li>
+						<li><span>Defense:</span> ${pokemon.stats[2].base_stat}</li>
+						<li><span>Special Attack:</span> ${pokemon.stats[3].base_stat}</li>
+						<li><span>Special Defense:</span> ${pokemon.stats[4].base_stat}</li>
+						<li><span>Speed:</span> ${pokemon.stats[5].base_stat}</li>
+					</ul>
+				</div>
+  `;
+	flipEl.innerHTML = pokeInnerHtml;
 	poke_container.appendChild(pokemonEl);
 }
 
-const fetchPokemons = async () => {
-	for (let i = 1; i <= pokemons_number; i++) {
-		await getPokemon(i);
+function assignColor(pokemonEl, color1, color2 = null) {
+	if (color2 == null) {
+		pokemonEl.style.backgroundColor = color1;
+	} else {
+		pokemonEl.style.background =
+			"linear-gradient(" + "150deg" + ", " + color1 + ", " + color2 + ")";
 	}
-};
+}
 
 fetchPokemons();
