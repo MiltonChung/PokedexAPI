@@ -12,6 +12,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
+		<script
+			src="https://kit.fontawesome.com/07e5ac0c0d.js"
+			crossorigin="anonymous"
+		></script>
 		<title>Pokedex | API</title>
 	</head>
 	<body onload="loadingAnimation()">
@@ -81,18 +85,6 @@
 		</div>
 
 		<header>
-			<div class="leftNav">
-				<div class="dropdown">
-					<button class="dropbtn">Generation</button>
-					<div class="dropdown-content">
-						<a onclick="changeGen(1)" id="gen1">Gen 1</a>
-						<a onclick="changeGen(2)" id="gen2">Gen 2</a>
-						<a onclick="changeGen(3)" id="gen3">Gen 3</a>
-						<a onclick="changeGen(4)" id="gen4">Gen 4</a>
-						<a onclick="changeGen(5)" id="gen5">Gen 5</a>
-					</div>
-				</div>
-			</div>
 			<div class="title">
 				<img
 					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
@@ -102,7 +94,30 @@
 					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
 				/>
 			</div>
-			<div class="rightNav"></div>
+
+			<div class="rightSide">
+				<div class="dropdown">
+					<button class="dropbtn">
+						Generation <i class="fas fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						<a onclick="changeGen(1)" id="gen1">Gen 1</a>
+						<a onclick="changeGen(2)" id="gen2">Gen 2</a>
+						<a onclick="changeGen(3)" id="gen3">Gen 3</a>
+						<a onclick="changeGen(4)" id="gen4">Gen 4</a>
+						<a onclick="changeGen(5)" id="gen5">Gen 5</a>
+					</div>
+				</div>
+
+				<div class="randomPokemonGen">
+					<a href="">Random Pokemon Generator</a>
+				</div>
+
+				<form class="example" action="action_page.php">
+					<input type="text" placeholder="Search Pokemon.." name="search" />
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
 		</header>
 
 		<div id="poke_container" class="poke-container animate-bottom"></div>

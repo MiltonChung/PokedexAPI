@@ -24,31 +24,47 @@ h1 {
 }
 
 header {
-	width: 90%;
+	width: 85%;
+	margin-bottom: 1rem;
 	display: flex;
-	justify-content: space-between;
-	margin: 1rem;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 header .title {
 	display: flex;
+	justify-content: left;
 }
 
 header .title > img {
 	width: 60px;
-	height: auto;
+	height: 60px;
+}
+
+header .rightSide {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 /* DROPDOWN MENU */
 .dropbtn {
-	background: linear-gradient(120deg, #ff0000, #ffc9c9);
+	background: white;
 	color: black;
-	padding: 16px;
-	font-size: 20px;
+	padding: 12px 15px 15px 15px;
+	font-size: 18px;
 	font-weight: 600;
-	border-radius: 15px;
-	border: 2px solid black;
-	cursor: pointer;
+	border: 2px solid red;
+	width: 160px;
+	height: 45px;
+	margin-left: 2rem;
+}
+
+.dropbtn:hover {
+	background-color: rgb(255, 209, 209);
 }
 
 .dropdown {
@@ -60,7 +76,9 @@ header .title > img {
 	display: none;
 	position: absolute;
 	background-color: #e0e0e0;
+	margin-left: 2rem;
 	min-width: 160px;
+	font-size: 18px;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 }
@@ -74,20 +92,80 @@ header .title > img {
 }
 
 .dropdown-content a:hover {
-	background-color: #f1f1f1;
+	background-color: #9678e2;
 }
 
 .dropdown:hover .dropdown-content {
 	display: block;
 }
 
-.dropdown:hover .dropbtn {
-	background-color: #3e8e41;
-}
-
 #gen1 {
 	font-weight: 700;
 	background-color: #cabbef;
+}
+
+/* RANDOM POKEMON GENERATOR BUTTON */
+.randomPokemonGen {
+	background: white;
+	padding: 8px 10px 10px 10px;
+	font-size: 20px;
+	font-weight: 600;
+	border: 2px solid red;
+	cursor: pointer;
+	width: 240px;
+	height: 45px;
+	text-align: center;
+}
+
+.randomPokemonGen:hover,
+.randomPokemonGen:hover a {
+	background: red;
+	color: white;
+}
+
+.randomPokemonGen a {
+	color: black;
+	text-decoration: none;
+	font-size: 15px;
+}
+
+/* FORM */
+form.example input[type="text"] {
+	padding: 10px;
+	font-size: 17px;
+	border: 2px solid red;
+	float: left;
+	width: 80%;
+	height: 45px;
+	background: white;
+}
+
+/* Style the submit button */
+form.example button {
+	float: left;
+	width: 20%;
+	height: 45px;
+
+	padding: 10px;
+	background: #f32121;
+	color: white;
+	font-size: 17px;
+	border: 1px solid red;
+	border-left: none; /* Prevent double borders */
+	cursor: pointer;
+}
+
+form.example button:hover {
+	background: rgb(245, 112, 112);
+	border: 1px solid rgb(245, 112, 112);
+	border-left: none;
+}
+
+/* Clear floats */
+form.example::after {
+	content: "";
+	clear: both;
+	display: table;
 }
 
 /* POKEDEX CARD LAYOUT */
