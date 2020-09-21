@@ -59,23 +59,23 @@ function changeGen(genNumber) {
 	switch (current_gen) {
 		case 1:
 			gen1_dropdown.style.fontWeight = 700;
-			gen1_dropdown.style.backgroundColor = "#cabbef";
+			gen1_dropdown.style.background = "#cabbef";
 			break;
 		case 2:
 			gen2_dropdown.style.fontWeight = 700;
-			gen2_dropdown.style.backgroundColor = "#cabbef";
+			gen2_dropdown.style.background = "#cabbef";
 			break;
 		case 3:
 			gen3_dropdown.style.fontWeight = 700;
-			gen3_dropdown.style.backgroundColor = "#cabbef";
+			gen3_dropdown.style.background = "#cabbef";
 			break;
 		case 4:
 			gen4_dropdown.style.fontWeight = 700;
-			gen4_dropdown.style.backgroundColor = "#cabbef";
+			gen4_dropdown.style.background = "#cabbef";
 			break;
 		case 5:
 			gen5_dropdown.style.fontWeight = 700;
-			gen5_dropdown.style.backgroundColor = "#cabbef";
+			gen5_dropdown.style.background = "#cabbef";
 			break;
 
 		default:

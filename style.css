@@ -75,7 +75,7 @@ header .rightSide {
 .dropdown-content {
 	display: none;
 	position: absolute;
-	background-color: #e0e0e0;
+	background-color: white !important;
 	margin-left: 2rem;
 	min-width: 160px;
 	font-size: 18px;
@@ -92,7 +92,7 @@ header .rightSide {
 }
 
 .dropdown-content a:hover {
-	background-color: #9678e2;
+	background: #9678e2 !important;
 }
 
 .dropdown:hover .dropdown-content {
