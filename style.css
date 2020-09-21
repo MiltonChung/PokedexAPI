@@ -34,6 +34,9 @@ header {
 header .title {
 	display: flex;
 	justify-content: left;
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
 }
 
 header .title > img {
