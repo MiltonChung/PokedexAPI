@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./style.css" />
-		<link rel="stylesheet" href="./animations.css" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;1,300&display=swap"
-			rel="stylesheet"
-		/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-		<link rel="icon" href="./favicon.ico" type="image/x-icon" />
-		<title>Pokedex | API</title>
-	</head>
-	<body onload="loadingAnimation()">
-		<div class="loader" id="loader">
-			<svg
+<svg
 				version="1.1"
 				id="Ebene_1"
 				xmlns="http://www.w3.org/2000/svg"
@@ -78,41 +60,3 @@
 					/>
 				</g>
 			</svg>
-		</div>
-
-		<header>
-			<div class="leftNav">
-				<div class="dropdown">
-					<button class="dropbtn">Generation</button>
-					<div class="dropdown-content">
-						<a onclick="changeGen(1)" id="gen1">Gen 1</a>
-						<a onclick="changeGen(2)" id="gen2">Gen 2</a>
-						<a onclick="changeGen(3)" id="gen3">Gen 3</a>
-						<a onclick="changeGen(4)" id="gen4">Gen 4</a>
-						<a onclick="changeGen(5)" id="gen5">Gen 5</a>
-					</div>
-				</div>
-			</div>
-			<div class="title">
-				<img
-					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
-				/>
-				<h1>PokeDex</h1>
-				<img
-					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
-				/>
-			</div>
-			<div class="rightNav"></div>
-		</header>
-
-		<div id="poke_container" class="poke-container animate-bottom"></div>
-
-		<a class="loadMore" id="loadMore"
-			><div class="loaderBottom" id="loaderBottom"></div>
-			<p>Scroll to load more...</p></a
-		>
-
-		<script src="./script.js"></script>
-		<script type="text/javascript"></script>
-	</body>
-</html>

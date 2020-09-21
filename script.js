@@ -1,5 +1,30 @@
 const poke_container = document.getElementById("poke_container");
-const pokemons_number = 150;
+const loader = document.getElementById("loader");
+const loaderBottom = document.getElementById("loaderBottom");
+const loadMoreText = document.getElementById("loadMore");
+const gen1_dropdown = document.getElementById("gen1");
+const gen2_dropdown = document.getElementById("gen2");
+const gen3_dropdown = document.getElementById("gen3");
+const gen4_dropdown = document.getElementById("gen4");
+const gen5_dropdown = document.getElementById("gen5");
+let pokemons_number_start_gen1 = 1;
+let pokemons_number_end_gen1 = 151;
+let pokemons_number_start_gen2 = 152;
+let pokemons_number_end_gen2 = 251;
+let pokemons_number_start_gen3 = 252;
+let pokemons_number_end_gen3 = 386;
+let pokemons_number_start_gen4 = 387;
+let pokemons_number_end_gen4 = 493;
+let pokemons_number_start_gen5 = 494;
+let pokemons_number_end_gen5 = 649;
+let load_number = 30;
+let end1 = pokemons_number_start_gen1 + load_number;
+let end2 = pokemons_number_start_gen2 + load_number;
+let end3 = pokemons_number_start_gen3 + load_number;
+let end4 = pokemons_number_start_gen4 + load_number;
+let end5 = pokemons_number_start_gen5 + load_number;
+let current_gen = 1;
+let timeout;
 const colors = {
 	fire: "#F08030",
 	grass: "#78C850",
@@ -25,9 +50,149 @@ const colors = {
 // Takes out the keys from the colors object
 const main_types = Object.keys(colors);
 
-const fetchPokemons = async () => {
-	for (let i = 1; i <= pokemons_number; i++) {
-		await getPokemon(i);
+function changeGen(genNumber) {
+	current_gen = genNumber;
+	clearStyle();
+	clearPage();
+	loadingAnimation();
+	switch (current_gen) {
+		case 1:
+			gen1_dropdown.style.fontWeight = 700;
+			gen1_dropdown.style.backgroundColor = "#cabbef";
+			break;
+		case 2:
+			gen2_dropdown.style.fontWeight = 700;
+			gen2_dropdown.style.backgroundColor = "#cabbef";
+			break;
+		case 3:
+			gen3_dropdown.style.fontWeight = 700;
+			gen3_dropdown.style.backgroundColor = "#cabbef";
+			break;
+		case 4:
+			gen4_dropdown.style.fontWeight = 700;
+			gen4_dropdown.style.backgroundColor = "#cabbef";
+			break;
+		case 5:
+			gen5_dropdown.style.fontWeight = 700;
+			gen5_dropdown.style.backgroundColor = "#cabbef";
+			break;
+
+		default:
+			break;
+	}
+
+	fetchPokemons(current_gen);
+}
+
+function clearStyle() {
+	gen1_dropdown.style.fontWeight = 400;
+	gen1_dropdown.style.backgroundColor = "white";
+
+	gen2_dropdown.style.fontWeight = 400;
+	gen2_dropdown.style.backgroundColor = "white";
+
+	gen3_dropdown.style.fontWeight = 400;
+	gen3_dropdown.style.backgroundColor = "white";
+
+	gen4_dropdown.style.fontWeight = 400;
+	gen4_dropdown.style.backgroundColor = "white";
+
+	gen5_dropdown.style.fontWeight = 400;
+	gen5_dropdown.style.backgroundColor = "white";
+}
+
+function clearPage() {
+	poke_container.innerHTML = "";
+}
+
+const fetchPokemons = async (genNumber = 1) => {
+	switch (genNumber) {
+		case 1:
+			for (let i = pokemons_number_start_gen1; i <= end1; i++) {
+				await getPokemon(i);
+				console.log("got: " + i);
+				if (i == pokemons_number_end_gen1) {
+					loadMoreText.style.display = "none";
+				}
+			}
+
+			pokemons_number_start_gen1 = pokemons_number_start_gen1 + load_number + 1;
+			end1 = end1 + load_number + 1;
+
+			if (end1 >= pokemons_number_end_gen1) {
+				end1 = pokemons_number_end_gen1;
+			}
+			break;
+		case 2:
+			load_number = 30;
+			for (let i = pokemons_number_start_gen2; i <= end2; i++) {
+				await getPokemon(i);
+				console.log("got: " + i);
+				if (i == pokemons_number_end_gen2) {
+					loadMoreText.style.display = "none";
+				}
+			}
+
+			pokemons_number_start_gen2 = pokemons_number_start_gen2 + load_number + 1;
+			end2 = end2 + load_number + 1;
+
+			if (end2 >= pokemons_number_end_gen2) {
+				end2 = pokemons_number_end_gen2;
+			}
+			break;
+		case 3:
+			load_number = 30;
+			for (let i = pokemons_number_start_gen3; i <= end3; i++) {
+				await getPokemon(i);
+				console.log("got: " + i);
+				if (i == pokemons_number_end_gen3) {
+					loadMoreText.style.display = "none";
+				}
+			}
+
+			pokemons_number_start_gen3 = pokemons_number_start_gen3 + load_number + 1;
+			end3 = end3 + load_number + 1;
+
+			if (end3 >= pokemons_number_end_gen3) {
+				end3 = pokemons_number_end_gen3;
+			}
+			break;
+		case 4:
+			load_number = 30;
+			for (let i = pokemons_number_start_gen4; i <= end4; i++) {
+				await getPokemon(i);
+				console.log("got: " + i);
+				if (i == pokemons_number_end_gen1) {
+					loadMoreText.style.display = "none";
+				}
+			}
+
+			pokemons_number_start_gen4 = pokemons_number_start_gen4 + load_number + 1;
+			end4 = end4 + load_number + 1;
+
+			if (end4 >= pokemons_number_end_gen4) {
+				end4 = pokemons_number_end_gen4;
+			}
+			break;
+		case 5:
+			load_number = 30;
+			for (let i = pokemons_number_start_gen5; i <= end5; i++) {
+				await getPokemon(i);
+				console.log("got: " + i);
+				if (i == pokemons_number_end_gen1) {
+					loadMoreText.style.display = "none";
+				}
+			}
+
+			pokemons_number_start_gen5 = pokemons_number_start_gen5 + load_number + 1;
+			end5 = end5 + load_number + 1;
+
+			if (end5 >= pokemons_number_end_gen5) {
+				end5 = pokemons_number_end_gen5;
+			}
+			break;
+		default:
+			break;
 	}
 };
 
@@ -71,7 +236,7 @@ function createPokemonCard(pokemon) {
 	pokemonEl.appendChild(flipEl);
 	const pokeInnerHtml = `
 	 
-        <div class="flip-card-front">
+        <div class="flip-card-front" >
           <div class="img-container">
             <img src="${pokemon.sprites.other.dream_world.front_default}" />
           </div>
@@ -109,4 +274,32 @@ function assignColor(pokemonEl, color1, color2 = null) {
 	}
 }
 
-fetchPokemons();
+fetchPokemons(current_gen);
+
+function loadingAnimation() {
+	loader.style.display = "block";
+	poke_container.style.display = "none";
+	loadMoreText.style.display = "none";
+	timeout = setTimeout(showPage, 800);
+}
+
+function showPage() {
+	loader.style.display = "none";
+	poke_container.style.display = "flex";
+	loadMoreText.style.display = "flex";
+}
+
+function sleep(milliseconds) {
+	const date = Date.now();
+	let currentDate = null;
+	do {
+		currentDate = Date.now();
+	} while (currentDate - date < milliseconds);
+}
+
+$(window).scroll(function () {
+	if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
+		sleep(500);
+		fetchPokemons(current_gen);
+	}
+});
