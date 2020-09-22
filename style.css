@@ -374,23 +374,139 @@ form.example::after {
 	}
 }
 
+.mobile {
+	display: none;
+}
+
 @media (max-width: 875px) {
-	nav .mobileNav {
-		display: flex;
-		margin-top: 0.7rem;
-	}
-
-	nav .hamBar {
-		display: block;
-		margin-left: 1rem;
-	}
-
 	nav .mobileSearch {
 		display: block;
 	}
 
 	nav ul li {
 		display: none;
+	}
+
+	nav .mobileNav {
+		cursor: pointer;
+		display: flex;
+		margin-top: 0.7rem;
+	}
+
+	nav .hamBar {
+		cursor: pointer;
+		display: block;
+		margin-left: 1rem;
+	}
+
+	nav .menu.mobile li {
+		display: block;
+	}
+
+	nav {
+		display: block;
+		float: left;
+		margin-left: 2rem;
+	}
+
+	.menu__icon {
+		height: 20px;
+		width: 30px;
+		position: absolute;
+		top: 15px;
+		right: 5%;
+		display: inline-block;
+		vertical-align: middle;
+		z-index: 20;
+	}
+
+	.menu__icon span {
+		display: block;
+		background: red;
+		width: 100%;
+		height: 4px;
+		margin-top: -2px;
+		position: absolute;
+		left: 0;
+		top: 50%;
+	}
+
+	.menu__icon:before,
+	.menu__icon:after {
+		content: "";
+		display: block;
+		background: red;
+		width: 100%;
+		height: 4px;
+		position: absolute;
+		left: 0;
+		transform-origin: center center;
+		transform: rotate(0deg);
+		transition: all 0.3s ease;
+	}
+
+	.menu__icon:before {
+		top: 2px;
+		margin-top: -2px;
+	}
+
+	.menu__icon:after {
+		bottom: 2px;
+		margin-bottom: -2px;
+	}
+
+	.menu_shown .menu__icon span {
+		background: transparent;
+	}
+
+	.menu_shown .menu__icon:before {
+		top: 50%;
+		transform: rotate(45deg);
+	}
+
+	.menu_shown .menu__icon:after {
+		bottom: 50%;
+		transform: rotate(-45deg);
+	}
+
+	.mobile.menu {
+		display: block;
+		position: absolute;
+		top: 7%;
+		left: 53%;
+		width: 45%;
+		min-height: 10vh;
+
+		text-align: center;
+		background: #ffffffe3;
+		z-index: 10;
+		transition: all 0.4s ease-in-out;
+		transform: translateX(155%);
+	}
+
+	#gen1-m {
+		font-weight: 700;
+		background-color: #cabbef;
+	}
+
+	.menu_shown .mobile.menu {
+		transform: translateX(0);
+	}
+
+	.mobile .menu__item {
+		display: block;
+		padding: 5px 0;
+		border-bottom: 1px solid black;
+		text-decoration: none;
+		color: black;
+		font-weight: 500;
+		font-size: 16px;
+		cursor: pointer;
+	}
+
+	.mobile .menu__item:active {
+		background: #cabbef;
+		font-weight: 700;
 	}
 }
 

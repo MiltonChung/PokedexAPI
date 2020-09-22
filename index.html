@@ -84,7 +84,7 @@
 			</svg>
 		</div>
 
-		<nav>
+		<nav id="nav">
 			<a class="title" href="/PokedexAPI">
 				<img
 					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
@@ -124,14 +124,38 @@
 					</form>
 				</li>
 			</ul>
-			<div class="mobileNav">
-				<div class="mobileSearch" onClick="toggleSearch()">
+			<a class="menu__icon mobile"><span></span></a>
+			<ul class="menu mobile">
+				<li>
+					<a onclick="changeGen(1)" id="gen1-m" class="menu__item">Gen 1</a>
+				</li>
+				<li>
+					<a onclick="changeGen(2)" id="gen2-m" class="menu__item">Gen 2</a>
+				</li>
+				<li>
+					<a onclick="changeGen(3)" id="gen3-m" class="menu__item">Gen 3</a>
+				</li>
+				<li>
+					<a onclick="changeGen(4)" id="gen4-m" class="menu__item">Gen 4</a>
+				</li>
+				<li>
+					<a onclick="changeGen(5)" id="gen5-m" class="menu__item">Gen 5</a>
+				</li>
+				<li>
+					<a href="./randomPokemonGenerator.html" class="menu__item"
+						>Random Pokemon Generator</a
+					>
+				</li>
+			</ul>
+
+			<!-- <div class="mobileNav">
+				<div class="mobileSearch" id="mobileSearch" onClick="toggleSearch()">
 					<i class="fa fa-search"></i>
 				</div>
-				<div class="hamBar" onClick="toggleMenu()">
+				<div class="hamBar" id="hamBar" onClick="toggleMenu()">
 					<i class="fas fa-bars"></i>
 				</div>
-			</div>
+			</div> -->
 		</nav>
 		<div class="container">
 			<div id="poke_container" class="poke-container animate-bottom"></div>

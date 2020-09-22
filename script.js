@@ -7,6 +7,14 @@ const gen2_dropdown = document.getElementById("gen2");
 const gen3_dropdown = document.getElementById("gen3");
 const gen4_dropdown = document.getElementById("gen4");
 const gen5_dropdown = document.getElementById("gen5");
+const gen1_m = document.getElementById("gen1-m");
+const gen2_m = document.getElementById("gen2-m");
+const gen3_m = document.getElementById("gen3-m");
+const gen4_m = document.getElementById("gen4-m");
+const gen5_m = document.getElementById("gen5-m");
+const hamBar = document.getElementById("hamBar");
+const mobileSearch = document.getElementById("mobileSearch");
+const nav = document.getElementById("nav");
 let pokemons_number_start_gen1 = 1;
 let pokemons_number_end_gen1 = 151;
 let pokemons_number_start_gen2 = 152;
@@ -51,6 +59,10 @@ const colors = {
 // Takes out the keys from the colors object
 const main_types = Object.keys(colors);
 
+function toggleMenu() {
+	nav.classList.toggle("menu_shown");
+}
+
 function changeGen(genNumber) {
 	current_gen = genNumber;
 	clearStyle();
@@ -61,25 +73,39 @@ function changeGen(genNumber) {
 		case 1:
 			gen1_dropdown.style.fontWeight = 700;
 			gen1_dropdown.style.background = "#cabbef";
+			gen1_m.style.fontWeight = 700;
+			gen1_m.style.background = "#cabbef";
 			break;
 		case 2:
-			gen2_dropdown.style.fontWeight = 700;
-			gen2_dropdown.style.background = "#cabbef";
+			gen2_m.style.fontWeight = 700;
+			gen2_m.style.background = "#cabbef";
+			gen2_m.style.fontWeight = 700;
+			gen2_m.style.background = "#cabbef";
 			break;
 		case 3:
 			gen3_dropdown.style.fontWeight = 700;
 			gen3_dropdown.style.background = "#cabbef";
+			gen3_m.style.fontWeight = 700;
+			gen3_m.style.background = "#cabbef";
 			break;
 		case 4:
 			gen4_dropdown.style.fontWeight = 700;
 			gen4_dropdown.style.background = "#cabbef";
+			gen4_m.style.fontWeight = 700;
+			gen4_m.style.background = "#cabbef";
 			break;
 		case 5:
 			gen5_dropdown.style.fontWeight = 700;
 			gen5_dropdown.style.background = "#cabbef";
+			gen5_m.style.fontWeight = 700;
+			gen5_m.style.background = "#cabbef";
 			break;
 
 		default:
+			gen1_dropdown.style.fontWeight = 700;
+			gen1_dropdown.style.background = "#cabbef";
+			gen1_m.style.fontWeight = 700;
+			gen1_m.style.background = "#cabbef";
 			break;
 	}
 
@@ -89,18 +115,28 @@ function changeGen(genNumber) {
 function clearStyle() {
 	gen1_dropdown.style.fontWeight = 400;
 	gen1_dropdown.style.backgroundColor = "white";
+	gen1_m.style.fontWeight = 400;
+	gen1_m.style.backgroundColor = "white";
 
 	gen2_dropdown.style.fontWeight = 400;
 	gen2_dropdown.style.backgroundColor = "white";
+	gen2_m.style.fontWeight = 400;
+	gen2_m.style.backgroundColor = "white";
 
 	gen3_dropdown.style.fontWeight = 400;
 	gen3_dropdown.style.backgroundColor = "white";
+	gen3_m.style.fontWeight = 400;
+	gen3_m.style.backgroundColor = "white";
 
 	gen4_dropdown.style.fontWeight = 400;
 	gen4_dropdown.style.backgroundColor = "white";
+	gen4_m.style.fontWeight = 400;
+	gen4_m.style.backgroundColor = "white";
 
 	gen5_dropdown.style.fontWeight = 400;
 	gen5_dropdown.style.backgroundColor = "white";
+	gen5_m.style.fontWeight = 400;
+	gen5_m.style.backgroundColor = "white";
 }
 
 function clearPage() {
@@ -323,4 +359,10 @@ $(window).scroll(function () {
 		sleep(800);
 		fetchPokemons(current_gen);
 	}
+});
+
+$(document).ready(function () {
+	$(".menu__icon").click(function () {
+		$("nav").toggleClass("menu_shown");
+	});
 });
