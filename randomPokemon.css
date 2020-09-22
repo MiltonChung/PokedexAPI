@@ -4,7 +4,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: rgba(206, 206, 206, 0.479);
-	width: 400px;
+	width: 30%;
 	height: 620px;
 }
 
@@ -98,8 +98,8 @@
 .displayStats {
 	background: rgba(255, 255, 255, 0.151);
 	padding: 0.5rem;
-	width: 350px;
-	height: 170px;
+	width: 80%;
+	height: 34%;
 	position: absolute;
 	top: 82%;
 	left: 50%;

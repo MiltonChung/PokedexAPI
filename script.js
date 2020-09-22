@@ -44,6 +44,7 @@ const colors = {
 	steel: "#B8B8D0",
 	ice: "#98D8D8",
 	shadow: "rgb(105, 66, 99)",
+	dark: "rgb(75, 75, 75)",
 	unknwon: "#68A090",
 };
 
@@ -300,7 +301,7 @@ function loadingAnimation() {
 	loader.style.display = "block";
 	poke_container.style.display = "none";
 	loadMoreText.style.display = "none";
-	timeout = setTimeout(showPage, 800);
+	setTimeout(showPage, 800);
 }
 
 function showPage() {
@@ -319,7 +320,7 @@ function sleep(milliseconds) {
 
 $(window).scroll(function () {
 	if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
-		sleep(500);
+		sleep(800);
 		fetchPokemons(current_gen);
 	}
 });

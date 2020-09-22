@@ -84,7 +84,7 @@
 			</svg>
 		</div>
 
-		<header>
+		<nav>
 			<a class="title" href="/PokedexAPI">
 				<img
 					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
@@ -95,38 +95,52 @@
 				/>
 			</a>
 
-			<div class="rightSide">
-				<div class="dropdown">
-					<button class="dropbtn">
-						Generation <i class="fas fa-caret-down"></i>
-					</button>
-					<div class="dropdown-content">
-						<a onclick="changeGen(1)" id="gen1">Gen 1</a>
-						<a onclick="changeGen(2)" id="gen2">Gen 2</a>
-						<a onclick="changeGen(3)" id="gen3">Gen 3</a>
-						<a onclick="changeGen(4)" id="gen4">Gen 4</a>
-						<a onclick="changeGen(5)" id="gen5">Gen 5</a>
+			<ul>
+				<li>
+					<div class="dropdown">
+						<button class="dropbtn">
+							Generation <i class="fas fa-caret-down"></i>
+						</button>
+						<div class="dropdown-content">
+							<a onclick="changeGen(1)" id="gen1">Gen 1</a>
+							<a onclick="changeGen(2)" id="gen2">Gen 2</a>
+							<a onclick="changeGen(3)" id="gen3">Gen 3</a>
+							<a onclick="changeGen(4)" id="gen4">Gen 4</a>
+							<a onclick="changeGen(5)" id="gen5">Gen 5</a>
+						</div>
 					</div>
-				</div>
+				</li>
 
-				<div class="randomPokemonGen">
-					<a href="./randomPokemonGenerator.html">Random Pokemon Generator</a>
-				</div>
+				<li>
+					<div class="randomPokemonGen">
+						<a href="./randomPokemonGenerator.html">Random Pokemon Generator</a>
+					</div>
+				</li>
 
-				<form class="example">
-					<input type="text" placeholder="Search Pokemon.." name="search" />
-					<button type="submit"><i class="fa fa-search"></i></button>
-				</form>
+				<li>
+					<form class="example">
+						<input type="text" placeholder="Search Pokemon.." name="search" />
+						<button type="submit"><i class="fa fa-search"></i></button>
+					</form>
+				</li>
+			</ul>
+			<div class="mobileNav">
+				<div class="mobileSearch" onClick="toggleSearch()">
+					<i class="fa fa-search"></i>
+				</div>
+				<div class="hamBar" onClick="toggleMenu()">
+					<i class="fas fa-bars"></i>
+				</div>
 			</div>
-		</header>
+		</nav>
+		<div class="container">
+			<div id="poke_container" class="poke-container animate-bottom"></div>
 
-		<div id="poke_container" class="poke-container animate-bottom"></div>
-
-		<a class="loadMore" id="loadMore"
-			><div class="loaderBottom" id="loaderBottom"></div>
-			<p>Scroll to load more...</p></a
-		>
-
+			<a class="loadMore" id="loadMore"
+				><div class="loaderBottom" id="loaderBottom"></div>
+				<p>Scroll to load more...</p></a
+			>
+		</div>
 		<script src="./script.js"></script>
 	</body>
 </html>

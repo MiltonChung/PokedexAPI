@@ -18,6 +18,7 @@ const colors = {
 	steel: "#B8B8D0",
 	ice: "#98D8D8",
 	shadow: "rgb(105, 66, 99)",
+	dark: "rgb(75, 75, 75)",
 	unknwon: "#68A090",
 };
 

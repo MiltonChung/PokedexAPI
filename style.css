@@ -23,15 +23,14 @@ h1 {
 	margin-top: 0.7rem;
 }
 
-header {
-	width: 85%;
-	margin-bottom: 1rem;
+nav {
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: space-around;
+	width: 100%;
+	max-width: 1500px;
 }
 
-header .title {
+nav .title {
 	display: flex;
 	justify-content: left;
 	cursor: pointer;
@@ -39,18 +38,37 @@ header .title {
 	color: black;
 }
 
-header .title > img {
+nav .title > img {
 	width: 60px;
 	height: 60px;
 }
 
-header .rightSide {
-	width: 100%;
+nav .hamBar {
+	display: none;
+}
+
+nav .mobileSearch {
+	display: none;
+}
+
+nav ul {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+	list-style-type: none;
+	padding: 0.5rem;
 	flex-wrap: wrap;
-	align-items: center;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+nav ul li {
+	margin: 0.2rem 1rem;
+}
+
+.container {
+	max-width: 1300px;
+	width: 89%;
+	overflow: hidden;
+	margin: auto;
 }
 
 /* DROPDOWN MENU */
@@ -178,7 +196,7 @@ form.example::after {
 	align-items: space-between;
 	justify-content: center;
 	margin: 0 auto;
-	width: 90%;
+	width: 100%;
 	display: none;
 }
 
@@ -261,9 +279,12 @@ form.example::after {
 }
 
 .loadMore {
-	margin-top: 2rem;
-	margin-bottom: 1rem;
+	margin-top: 4rem;
+	margin-bottom: 3rem;
 	display: none;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: center;
 }
 
 .loadMore > p {
@@ -271,19 +292,115 @@ form.example::after {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1245px) {
+	nav .title {
+		font-size: 17px;
+	}
+
+	nav .title > img {
+		width: 45px;
+		height: 45px;
+	}
+
+	form.example input[type="text"] {
+		padding: 5px;
+		font-size: 15px;
+	}
+
+	nav ul {
+		padding: 0.2rem;
+	}
+
+	nav ul li {
+		margin: 0.2rem;
+	}
+}
+
+@media (max-width: 1055px) {
+	.container {
+		width: 95%;
+	}
+	.dropbtn {
+		padding: 9px 9px 9px 11px;
+		font-size: 15px;
+		width: 120px;
+		height: 40px;
+		margin-left: 1rem;
+	}
+
+	.dropdown-content {
+		margin-left: 1rem;
+		font-size: 15px;
+	}
+
+	.dropdown-content a {
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		cursor: pointer;
+	}
+
+	/* RANDOM POKEMON GENERATOR BUTTON */
+	.randomPokemonGen {
+		padding: 9px 9px 9px 11px;
+		font-size: 15px;
+		width: 240px;
+		height: 40px;
+	}
+
+	form.example input[type="text"] {
+		padding: 5px;
+		font-size: 15px;
+		height: 40px;
+	}
+
+	form.example button {
+		width: 18%;
+		height: 40px;
+		padding: 5px;
+		font-size: 15px;
+	}
+}
+
 @media (max-width: 920px) {
 	.poke-container {
 		width: 100%;
 	}
+
+	.flip-card-inner {
+		border: 1.5px solid black;
+		margin: 5px 5px;
+	}
 }
 
-@media (max-width: 400px) {
-	.poke-container {
+@media (max-width: 875px) {
+	nav .mobileNav {
+		display: flex;
+		margin-top: 0.7rem;
+	}
+
+	nav .hamBar {
+		display: block;
+		margin-left: 1rem;
+	}
+
+	nav .mobileSearch {
+		display: block;
+	}
+
+	nav ul li {
+		display: none;
+	}
+}
+
+@media (max-width: 430px) {
+	.container {
 		width: 100%;
 	}
 
-	.pokemon {
-		border: 1px solid black;
-		margin: 5px;
+	.flip-card-inner {
+		border: 0px solid black;
+		margin: 5px 1px;
 	}
 }
