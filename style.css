@@ -63,6 +63,7 @@ nav ul li {
 .wrapper {
 	overflow-x: hidden;
 	position: relative;
+	width: 100%;
 }
 
 .container {

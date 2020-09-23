@@ -26,7 +26,7 @@ let pokemons_number_start_gen4 = 387;
 let pokemons_number_end_gen4 = 493;
 let pokemons_number_start_gen5 = 494;
 let pokemons_number_end_gen5 = 649;
-let load_number = 50;
+let load_number = 80;
 let end1 = pokemons_number_start_gen1 + load_number;
 let end2 = pokemons_number_start_gen2 + load_number;
 let end3 = pokemons_number_start_gen3 + load_number;
@@ -35,6 +35,7 @@ let end5 = pokemons_number_start_gen5 + load_number;
 let current_gen = 1;
 let timeout;
 let stillInSearch = false;
+let homepage = true;
 const colors = {
 	fire: "#F08030",
 	grass: "#78C850",
@@ -71,8 +72,10 @@ function changeGen(genNumber) {
 	clearPage();
 	loadingAnimation();
 	resetStartAndEnd();
+	homepage = false;
 	switch (current_gen) {
 		case 1:
+			homepage = true;
 			gen1_dropdown.style.fontWeight = 700;
 			gen1_dropdown.style.background = "#cabbef";
 			gen1_m.style.fontWeight = 700;
@@ -167,20 +170,29 @@ function resetStartAndEnd() {
 const fetchPokemons = async (genNumber = 1) => {
 	switch (genNumber) {
 		case 1:
-			for (let i = pokemons_number_start_gen1; i <= end1; i++) {
+			for (
+				let i = pokemons_number_start_gen1;
+				i <= pokemons_number_end_gen1;
+				i++
+			) {
 				await getPokemon(i);
-				console.log("got: " + i);
-				if (i == pokemons_number_end_gen1) {
-					loadMoreText.style.display = "none";
-				}
+				// console.log("got: " + i);
+				loadMoreText.style.display = "none";
 			}
+			// for (let i = pokemons_number_start_gen1; i <= end1; i++) {
+			// 	await getPokemon(i);
+			// 	console.log("got: " + i);
+			// 	if (i == pokemons_number_end_gen1) {
+			// 		loadMoreText.style.display = "none";
+			// 	}
+			// }
 
-			pokemons_number_start_gen1 = pokemons_number_start_gen1 + load_number + 1;
-			end1 = end1 + load_number + 1;
+			// pokemons_number_start_gen1 = pokemons_number_start_gen1 + load_number + 1;
+			// end1 = end1 + load_number + 1;
 
-			if (end1 >= pokemons_number_end_gen1) {
-				end1 = pokemons_number_end_gen1;
-			}
+			// if (end1 >= pokemons_number_end_gen1) {
+			// 	end1 = pokemons_number_end_gen1;
+			// }
 			break;
 		case 2:
 			load_number = 30;
@@ -359,7 +371,11 @@ function sleep(milliseconds) {
 $(window).scroll(function () {
 	if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
 		sleep(1500);
-		if (!stillInSearch) fetchPokemons(current_gen);
+		if (!stillInSearch) {
+			if (!homepage) {
+				fetchPokemons(current_gen);
+			}
+		}
 	}
 });
 
@@ -389,13 +405,7 @@ search.addEventListener("mousein", function () {
 	stillInSearch = true;
 });
 search.addEventListener("mouseout", out);
-
 searchMobile.addEventListener("keyup", searchItem);
-searchMobile.addEventListener("mousein", function () {
-	mouseSearch = false;
-	stillInSearch = true;
-});
-searchMobile.addEventListener("mouseout", out);
 
 function out(e) {
 	request = e.target.value;
@@ -416,14 +426,25 @@ function out(e) {
 function searchItem(e) {
 	let request = e.target.value.toLowerCase();
 	let items = poke_container.getElementsByTagName("li");
-
 	loadMoreText.style.display = "none";
+
 	for (i = 0; i < items.length; i++) {
 		let item = items[i].className;
 
 		if (item == "pokemon") {
 			let pokemonName = items[i].getElementsByClassName("name")[0].innerText;
-			if (pokemonName.toLowerCase().indexOf(request) > -1) {
+			let pokemonNumber = items[i]
+				.getElementsByClassName("number")[0]
+				.innerHTML.slice(1);
+			let pokemonType = items[i]
+				.getElementsByClassName("type")[0]
+				.getElementsByTagName("span")[0]
+				.innerHTML.replace(/,/g, "");
+			if (
+				pokemonName.toLowerCase().indexOf(request) > -1 ||
+				pokemonNumber.indexOf(request) > -1 ||
+				pokemonType.toLowerCase().indexOf(request) > -1
+			) {
 				items[i].style.display = "block";
 			} else {
 				items[i].style.display = "none";
