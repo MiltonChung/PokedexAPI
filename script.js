@@ -1,4 +1,5 @@
 const poke_container = document.getElementById("poke_container");
+const individualPokemon = document.getElementById("pokemon");
 const loader = document.getElementById("loader");
 const loaderBottom = document.getElementById("loaderBottom");
 const loadMoreText = document.getElementById("loadMore");
@@ -25,7 +26,7 @@ let pokemons_number_start_gen4 = 387;
 let pokemons_number_end_gen4 = 493;
 let pokemons_number_start_gen5 = 494;
 let pokemons_number_end_gen5 = 649;
-let load_number = 30;
+let load_number = 50;
 let end1 = pokemons_number_start_gen1 + load_number;
 let end2 = pokemons_number_start_gen2 + load_number;
 let end3 = pokemons_number_start_gen3 + load_number;
@@ -33,6 +34,7 @@ let end4 = pokemons_number_start_gen4 + load_number;
 let end5 = pokemons_number_start_gen5 + load_number;
 let current_gen = 1;
 let timeout;
+let stillInSearch = false;
 const colors = {
 	fire: "#F08030",
 	grass: "#78C850",
@@ -261,7 +263,7 @@ const getPokemon = async (id) => {
 };
 
 function createPokemonCard(pokemon) {
-	const pokemonEl = document.createElement("div");
+	const pokemonEl = document.createElement("li");
 	pokemonEl.classList.add("pokemon");
 
 	const flipEl = document.createElement("div");
@@ -298,10 +300,10 @@ function createPokemonCard(pokemon) {
             <img src="${pokemon.sprites.other.dream_world.front_default}" />
           </div>
           <div class="info">
-            <span class="number">#${pokemon.id
+            <span class="number" id="number">#${pokemon.id
 							.toString()
 							.padStart(3, "0")}</span>
-            <h3 class="name">${name}</h3>
+            <h3 class="name" id="name">${name}</h3>
             <small class="type"> ${typePlural}: <span>${types}</span></small>
           </div>
         </div>
@@ -337,7 +339,7 @@ function loadingAnimation() {
 	loader.style.display = "block";
 	poke_container.style.display = "none";
 	loadMoreText.style.display = "none";
-	setTimeout(showPage, 800);
+	setTimeout(showPage, 1200);
 }
 
 function showPage() {
@@ -356,8 +358,8 @@ function sleep(milliseconds) {
 
 $(window).scroll(function () {
 	if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
-		sleep(800);
-		fetchPokemons(current_gen);
+		sleep(1500);
+		if (!stillInSearch) fetchPokemons(current_gen);
 	}
 });
 
@@ -376,3 +378,56 @@ $(document).ready(function () {
 		$(".mobileSearchBar").toggleClass("mobileSearchBarShown");
 	});
 });
+
+const search = document.getElementById("searchText");
+const searchMobile = document.getElementById("searchTextMobile");
+let emptySearch = true;
+let mouseSearch = true;
+search.addEventListener("keyup", searchItem);
+search.addEventListener("mousein", function () {
+	mouseSearch = false;
+	stillInSearch = true;
+});
+search.addEventListener("mouseout", out);
+
+searchMobile.addEventListener("keyup", searchItem);
+searchMobile.addEventListener("mousein", function () {
+	mouseSearch = false;
+	stillInSearch = true;
+});
+searchMobile.addEventListener("mouseout", out);
+
+function out(e) {
+	request = e.target.value;
+	if (request == "") {
+		emptySearch = true;
+		stillInSearch = false;
+	} else {
+		emptySearch = false;
+		stillInSearch = true;
+	}
+
+	if (emptySearch && mouseSearch) {
+		loadMoreText.style.display = "flex";
+		console.log("OUT AND ABOUT");
+	}
+}
+
+function searchItem(e) {
+	let request = e.target.value.toLowerCase();
+	let items = poke_container.getElementsByTagName("li");
+
+	loadMoreText.style.display = "none";
+	for (i = 0; i < items.length; i++) {
+		let item = items[i].className;
+
+		if (item == "pokemon") {
+			let pokemonName = items[i].getElementsByClassName("name")[0].innerText;
+			if (pokemonName.toLowerCase().indexOf(request) > -1) {
+				items[i].style.display = "block";
+			} else {
+				items[i].style.display = "none";
+			}
+		}
+	}
+}

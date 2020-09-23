@@ -119,13 +119,18 @@
 
 				<li>
 					<form class="example">
-						<input type="text" placeholder="Search Pokemon.." name="search" />
-						<button type="submit"><i class="fa fa-search"></i></button>
+						<input
+							type="text"
+							placeholder="Search Pokemon.."
+							name="search"
+							id="searchText"
+						/>
+						<i class="fa fa-search"></i>
 					</form>
 				</li>
 			</ul>
 
-			<div class="mobileSearch" id="mobileSearch" onClick="toggleSearch()">
+			<div class="mobileSearch" id="mobileSearch">
 				<i class="fa fa-search"></i>
 			</div>
 
@@ -153,16 +158,21 @@
 				</li>
 			</ul>
 
-			<div class="mobileSearchBar fade-in" id="mobileSearchBar">
+			<div class="mobileSearchBar" id="mobileSearchBar">
 				<form class="example">
-					<input type="text" placeholder="Search Pokemon.." name="search" />
-					<button type="submit"><i class="fa fa-search"></i></button>
+					<input
+						type="text"
+						placeholder="Search Pokemon.."
+						name="search"
+						id="searchTextMobile"
+					/>
+					<i class="fa fa-search"></i>
 				</form>
 			</div>
 		</nav>
 
 		<div class="container">
-			<div id="poke_container" class="poke-container animate-bottom"></div>
+			<ul id="poke_container" class="poke-container animate-bottom"></ul>
 
 			<a class="loadMore" id="loadMore"
 				><div class="loaderBottom" id="loaderBottom"></div>
