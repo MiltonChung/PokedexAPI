@@ -124,6 +124,11 @@
 					</form>
 				</li>
 			</ul>
+
+			<div class="mobileSearch" id="mobileSearch" onClick="toggleSearch()">
+				<i class="fa fa-search"></i>
+			</div>
+
 			<a class="menu__icon mobile"><span></span></a>
 			<ul class="menu mobile">
 				<li>
@@ -148,15 +153,14 @@
 				</li>
 			</ul>
 
-			<!-- <div class="mobileNav">
-				<div class="mobileSearch" id="mobileSearch" onClick="toggleSearch()">
-					<i class="fa fa-search"></i>
-				</div>
-				<div class="hamBar" id="hamBar" onClick="toggleMenu()">
-					<i class="fas fa-bars"></i>
-				</div>
-			</div> -->
+			<div class="mobileSearchBar fade-in" id="mobileSearchBar">
+				<form class="example">
+					<input type="text" placeholder="Search Pokemon.." name="search" />
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</form>
+			</div>
 		</nav>
+
 		<div class="container">
 			<div id="poke_container" class="poke-container animate-bottom"></div>
 

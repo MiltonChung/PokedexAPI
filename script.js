@@ -366,3 +366,13 @@ $(document).ready(function () {
 		$("nav").toggleClass("menu_shown");
 	});
 });
+
+$(".menu li a").on("click", function () {
+	$("nav").removeClass("menu_shown");
+});
+
+$(document).ready(function () {
+	$(".mobileSearch").click(function () {
+		$(".mobileSearchBar").toggleClass("mobileSearchBarShown");
+	});
+});

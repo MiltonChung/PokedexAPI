@@ -190,6 +190,10 @@ form.example::after {
 	display: table;
 }
 
+.mobileSearchBar {
+	display: none;
+}
+
 /* POKEDEX CARD LAYOUT */
 .poke-container {
 	display: flex;
@@ -380,8 +384,12 @@ form.example::after {
 }
 
 @media (max-width: 875px) {
-	nav .mobileSearch {
-		display: block;
+	nav {
+		display: flex;
+		float: left;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding-left: 1rem;
 	}
 
 	nav ul li {
@@ -392,14 +400,22 @@ form.example::after {
 		width: 30%;
 	}
 
-	nav .menu.mobile li {
-		display: block;
+	nav .mobileSearch {
+		display: flex;
+		height: 20px;
+		width: 30px;
+		position: absolute;
+		top: 15px;
+		right: 12%;
+		display: inline-block;
+		vertical-align: middle;
+		z-index: 20;
+		color: black;
+		cursor: pointer;
 	}
 
-	nav {
+	nav .menu.mobile li {
 		display: block;
-		float: left;
-		padding-left: 2rem;
 	}
 
 	.menu__icon {
@@ -416,11 +432,11 @@ form.example::after {
 	.menu__icon span {
 		display: block;
 		background: red;
-		width: 100%;
+		width: 80%;
 		height: 4px;
 		margin-top: -2px;
 		position: absolute;
-		left: 0;
+		left: 20%;
 		top: 50%;
 	}
 
@@ -428,7 +444,7 @@ form.example::after {
 	.menu__icon:after {
 		content: "";
 		display: block;
-		background: red;
+		background: black;
 		width: 100%;
 		height: 4px;
 		position: absolute;
@@ -502,6 +518,22 @@ form.example::after {
 		background: #cabbef;
 		font-weight: 700;
 	}
+
+	.mobileSearchBar {
+		display: none;
+	}
+
+	.mobileSearchBarShown {
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+		margin: 0 1rem 1.5rem 0;
+		animation: fadeIn ease 1s;
+		-webkit-animation: fadeIn ease 1s;
+		-moz-animation: fadeIn ease 1s;
+		-o-animation: fadeIn ease 1s;
+		-ms-animation: fadeIn ease 1s;
+	}
 }
 
 @media (max-width: 430px) {
@@ -512,5 +544,50 @@ form.example::after {
 	.flip-card-inner {
 		border: 0px solid black;
 		margin: 5px 1px;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-ms-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
