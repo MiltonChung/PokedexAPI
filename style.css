@@ -16,7 +16,6 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin: 0;
-	overflow-x: hidden;
 }
 
 h1 {
@@ -59,6 +58,11 @@ nav ul {
 
 nav ul li {
 	margin: 0.2rem 1rem;
+}
+
+.wrapper {
+	overflow-x: hidden;
+	position: relative;
 }
 
 .container {
@@ -375,6 +379,7 @@ form.example::after {
 		flex-direction: column;
 		justify-content: flex-start;
 		padding-left: 1rem;
+		overflow-x: hidden;
 	}
 
 	nav ul li {
@@ -467,7 +472,7 @@ form.example::after {
 	.mobile.menu {
 		display: block;
 		position: absolute;
-		top: 7%;
+		top: 40px;
 		left: 53%;
 		width: 45%;
 		min-height: 10vh;
