@@ -129,3 +129,9 @@ function assignColor(pokemonEl, color1, color2 = null) {
 			"linear-gradient(" + "150deg" + ", " + color1 + ", " + color2 + ")";
 	}
 }
+
+$(document).ready(function () {
+	$(".menu__icon").click(function () {
+		$("nav").toggleClass("menu_shown");
+	});
+});

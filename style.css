@@ -16,6 +16,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin: 0;
+	overflow: hidden;
 }
 
 h1 {
@@ -387,16 +388,8 @@ form.example::after {
 		display: none;
 	}
 
-	nav .mobileNav {
-		cursor: pointer;
-		display: flex;
-		margin-top: 0.7rem;
-	}
-
-	nav .hamBar {
-		cursor: pointer;
-		display: block;
-		margin-left: 1rem;
+	.title {
+		width: 30%;
 	}
 
 	nav .menu.mobile li {
@@ -406,7 +399,7 @@ form.example::after {
 	nav {
 		display: block;
 		float: left;
-		margin-left: 2rem;
+		padding-left: 2rem;
 	}
 
 	.menu__icon {
@@ -490,17 +483,18 @@ form.example::after {
 	}
 
 	.menu_shown .mobile.menu {
+		display: block;
 		transform: translateX(0);
 	}
 
 	.mobile .menu__item {
 		display: block;
-		padding: 5px 0;
+		padding: 12px 0;
 		border-bottom: 1px solid black;
 		text-decoration: none;
 		color: black;
 		font-weight: 500;
-		font-size: 16px;
+		font-size: 20px;
 		cursor: pointer;
 	}
 

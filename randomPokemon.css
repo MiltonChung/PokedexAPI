@@ -175,3 +175,9 @@
 		padding: 0.2rem 1rem 1rem 1rem;
 	}
 }
+
+@media (max-width: 875px) {
+	.mobile.menu {
+		min-height: 0vh;
+	}
+}
