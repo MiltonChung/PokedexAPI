@@ -1,7 +1,5 @@
 const poke_container = document.getElementById("poke_container");
-const individualPokemon = document.getElementById("pokemon");
 const loader = document.getElementById("loader");
-const loaderBottom = document.getElementById("loaderBottom");
 const loadMoreText = document.getElementById("loadMore");
 const gen1_dropdown = document.getElementById("gen1");
 const gen2_dropdown = document.getElementById("gen2");
@@ -33,7 +31,6 @@ let end3 = pokemons_number_start_gen3 + load_number;
 let end4 = pokemons_number_start_gen4 + load_number;
 let end5 = pokemons_number_start_gen5 + load_number;
 let current_gen = 1;
-let timeout;
 let stillInSearch = false;
 let homepage = true;
 const colors = {

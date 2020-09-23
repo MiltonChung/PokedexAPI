@@ -27,13 +27,14 @@ nav {
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
-	max-width: 1500px;
 }
 
 nav .title {
 	display: flex;
 	justify-content: left;
 	cursor: pointer;
+	justify-content: center;
+	align-items: center;
 	text-decoration: none;
 	color: black;
 }
@@ -54,6 +55,7 @@ nav ul {
 	flex-wrap: wrap;
 	justify-content: flex-end;
 	align-items: flex-end;
+	float: right;
 }
 
 nav ul li {
@@ -153,7 +155,7 @@ nav ul li {
 }
 
 /* FORM */
-form.example input[type="text"] {
+form.searchForm input[type="text"] {
 	padding: 14px 10px 10px 33px;
 	font-size: 17px;
 	border: 2px solid red;
@@ -163,11 +165,13 @@ form.example input[type="text"] {
 	background: white;
 }
 
-.example {
+.searchForm {
 	position: relative;
+	width: 100%;
+	float: right;
 }
 
-form.example i {
+form.searchForm i {
 	position: absolute;
 	top: 50%;
 	left: 10px;
@@ -175,7 +179,7 @@ form.example i {
 }
 
 /* Clear floats */
-form.example::after {
+form.searchForm::after {
 	content: "";
 	clear: both;
 	display: table;
@@ -299,7 +303,7 @@ form.example::after {
 		height: 45px;
 	}
 
-	form.example input[type="text"] {
+	form.searchForm input[type="text"] {
 		padding: 7px 5px 5px 32px;
 		font-size: 15px;
 	}
@@ -346,11 +350,11 @@ form.example::after {
 		height: 40px;
 	}
 
-	form.example input[type="text"] {
+	form.searchForm input[type="text"] {
 		height: 40px;
 	}
 
-	form.example button {
+	form.searchForm button {
 		width: 18%;
 		height: 40px;
 		padding: 5px;
