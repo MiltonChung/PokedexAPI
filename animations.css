@@ -223,8 +223,8 @@ svg {
 	backface-visibility: hidden;
 }
 
-/* @media (hover: none) {
+@media (hover: none) {
 	.pokemon:hover .flip-card-inner {
 		transform: rotateY(0deg);
 	}
-} */
+}
