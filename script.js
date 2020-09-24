@@ -14,6 +14,7 @@ const gen5_m = document.getElementById("gen5-m");
 const hamBar = document.getElementById("hamBar");
 const mobileSearch = document.getElementById("mobileSearch");
 const nav = document.getElementById("nav");
+const noResults = document.getElementById("noResults");
 let pokemons_number_start_gen1 = 1;
 let pokemons_number_end_gen1 = 151;
 let pokemons_number_start_gen2 = 152;
@@ -377,7 +378,7 @@ $(window).scroll(function () {
 });
 
 $(document).ready(function () {
-	$(".menu__icon").click(function () {
+	$(".mobileHamIcon").click(function () {
 		$("nav").toggleClass("menu_shown");
 	});
 });
@@ -425,9 +426,8 @@ function searchItem(e) {
 	let items = poke_container.getElementsByTagName("li");
 	loadMoreText.style.display = "none";
 
-	for (i = 0; i < items.length; i++) {
+	for (let i = 0; i < items.length; i++) {
 		let item = items[i].className;
-
 		if (item == "pokemon") {
 			let pokemonName = items[i].getElementsByClassName("name")[0].innerText;
 			let pokemonNumber = items[i]
@@ -447,5 +447,17 @@ function searchItem(e) {
 				items[i].style.display = "none";
 			}
 		}
+	}
+	let searchResult = [];
+
+	for (let i = 0; i < items.length; i++) {
+		if (getComputedStyle(items[i]).display == "none") {
+		} else if (getComputedStyle(items[i]).display == "block") {
+			searchResult.push("true");
+		}
+	}
+	noResults.classList.remove("showNoResults");
+	if (!searchResult.includes("true")) {
+		noResults.classList.add("showNoResults");
 	}
 }

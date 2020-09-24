@@ -66,6 +66,7 @@ nav ul li {
 	overflow-x: hidden;
 	position: relative;
 	width: 100%;
+	height: 100vh;
 }
 
 .container {
@@ -292,6 +293,18 @@ form.searchForm::after {
 	margin-top: 0.1rem;
 }
 
+.noResults {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	margin-top: 3rem;
+	font-size: 2rem;
+}
+
+.showNoResults {
+	display: flex;
+}
+
 /* RESPONSIVE */
 @media (max-width: 1245px) {
 	nav .title {
@@ -392,7 +405,7 @@ form.searchForm::after {
 	}
 
 	.title {
-		width: 30%;
+		width: 270px;
 	}
 
 	nav .mobileSearch {
@@ -413,7 +426,7 @@ form.searchForm::after {
 		display: block;
 	}
 
-	.menu__icon {
+	.mobileHamIcon {
 		height: 20px;
 		width: 30px;
 		position: absolute;
@@ -425,7 +438,7 @@ form.searchForm::after {
 		cursor: pointer;
 	}
 
-	.menu__icon span {
+	.mobileHamIcon span {
 		display: block;
 		background: red;
 		width: 80%;
@@ -436,8 +449,8 @@ form.searchForm::after {
 		top: 50%;
 	}
 
-	.menu__icon:before,
-	.menu__icon:after {
+	.mobileHamIcon:before,
+	.mobileHamIcon:after {
 		content: "";
 		display: block;
 		background: black;
@@ -450,26 +463,26 @@ form.searchForm::after {
 		transition: all 0.3s ease;
 	}
 
-	.menu__icon:before {
+	.mobileHamIcon:before {
 		top: 2px;
 		margin-top: -2px;
 	}
 
-	.menu__icon:after {
+	.mobileHamIcon:after {
 		bottom: 2px;
 		margin-bottom: -2px;
 	}
 
-	.menu_shown .menu__icon span {
+	.menu_shown .mobileHamIcon span {
 		background: transparent;
 	}
 
-	.menu_shown .menu__icon:before {
+	.menu_shown .mobileHamIcon:before {
 		top: 50%;
 		transform: rotate(45deg);
 	}
 
-	.menu_shown .menu__icon:after {
+	.menu_shown .mobileHamIcon:after {
 		bottom: 50%;
 		transform: rotate(-45deg);
 	}
@@ -499,7 +512,7 @@ form.searchForm::after {
 		transform: translateX(0);
 	}
 
-	.mobile .menu__item {
+	.mobile .menuItem {
 		display: block;
 		padding: 12px 0;
 		border-bottom: 1px solid black;
@@ -510,7 +523,7 @@ form.searchForm::after {
 		cursor: pointer;
 	}
 
-	.mobile .menu__item:active {
+	.mobile .menuItem:active {
 		background: #cabbef;
 		font-weight: 700;
 	}
@@ -521,9 +534,14 @@ form.searchForm::after {
 
 	.mobileSearchBarShown {
 		display: flex;
+		width: 250px;
+		position: absolute;
+		right: 5%;
+		top: 45px;
+		z-index: 19;
+
 		align-items: flex-end;
 		justify-content: flex-end;
-		margin: 0 1rem 1.5rem 0;
 		animation: fadeIn ease 1s;
 		-webkit-animation: fadeIn ease 1s;
 		-moz-animation: fadeIn ease 1s;
@@ -535,6 +553,10 @@ form.searchForm::after {
 @media (max-width: 430px) {
 	.container {
 		width: 100%;
+	}
+
+	.title {
+		width: 200px;
 	}
 
 	.flip-card-inner {
