@@ -25,7 +25,7 @@ let pokemons_number_start_gen4 = 387;
 let pokemons_number_end_gen4 = 493;
 let pokemons_number_start_gen5 = 494;
 let pokemons_number_end_gen5 = 649;
-let load_number = 80;
+let load_number = 30;
 let end1 = pokemons_number_start_gen1 + load_number;
 let end2 = pokemons_number_start_gen2 + load_number;
 let end3 = pokemons_number_start_gen3 + load_number;
@@ -35,6 +35,7 @@ let current_gen = 1;
 let stillInSearch = false;
 let homepage = true;
 let stillLoading = true;
+let firstLoad = true;
 const colors = {
 	fire: "#F08030",
 	grass: "#78C850",
@@ -68,10 +69,11 @@ function changeGen(genNumber) {
 	clearPage();
 	loadingAnimation();
 	resetStartAndEnd();
-	homepage = false;
+
+	// homepage = false;
 	switch (current_gen) {
 		case 1:
-			homepage = true;
+			// homepage = true;
 			applyStyle(gen1_dropdown);
 			applyStyle(gen1_m);
 			break;
@@ -153,7 +155,7 @@ function resetStartAndEnd() {
 	pokemons_number_end_gen4 = 493;
 	pokemons_number_start_gen5 = 494;
 	pokemons_number_end_gen5 = 649;
-	load_number = 50;
+	load_number = 30;
 	end1 = pokemons_number_start_gen1 + load_number;
 	end2 = pokemons_number_start_gen2 + load_number;
 	end3 = pokemons_number_start_gen3 + load_number;
@@ -166,21 +168,25 @@ const fetchPokemons = async (genNumber = 1) => {
 	stillLoading = true;
 	switch (genNumber) {
 		case 1:
-			for (
-				let i = pokemons_number_start_gen1;
-				i <= pokemons_number_end_gen1;
-				i++
-			) {
+			for (let i = pokemons_number_start_gen1; i <= end1; i++) {
 				await getPokemon(i);
+				console.log("GETTING: " + i);
 
-				if (i == pokemons_number_end_gen1) stillLoading = false;
+				if (i == end1) stillLoading = false;
 				loadMorePokemons();
-				loadMoreText.style.display = "none";
+				if (i == pokemons_number_end_gen1) {
+					loadMoreText.style.display = "none";
+				}
 			}
+			firstLoad = false;
+			pokemons_number_start_gen1 = pokemons_number_start_gen1 + load_number + 1;
+			end1 = end1 + load_number + 1;
+
+			if (end1 >= pokemons_number_end_gen1) end1 = pokemons_number_end_gen1;
 			break;
 
 		case 2:
-			load_number = 50;
+			load_number = 30;
 			for (let i = pokemons_number_start_gen2; i <= end2; i++) {
 				await getPokemon(i);
 				console.log("GETTING: " + i);
@@ -191,7 +197,7 @@ const fetchPokemons = async (genNumber = 1) => {
 					loadMoreText.style.display = "none";
 				}
 			}
-
+			firstLoad = false;
 			pokemons_number_start_gen2 = pokemons_number_start_gen2 + load_number + 1;
 			end2 = end2 + load_number + 1;
 
@@ -200,7 +206,7 @@ const fetchPokemons = async (genNumber = 1) => {
 			break;
 
 		case 3:
-			load_number = 50;
+			load_number = 30;
 			for (let i = pokemons_number_start_gen3; i <= end3; i++) {
 				await getPokemon(i);
 				console.log("GETTING: " + i);
@@ -211,7 +217,7 @@ const fetchPokemons = async (genNumber = 1) => {
 				if (i == end3) stillLoading = false;
 				loadMorePokemons();
 			}
-
+			firstLoad = false;
 			pokemons_number_start_gen3 = pokemons_number_start_gen3 + load_number + 1;
 			end3 = end3 + load_number + 1;
 
@@ -220,7 +226,7 @@ const fetchPokemons = async (genNumber = 1) => {
 			break;
 
 		case 4:
-			load_number = 50;
+			load_number = 30;
 			for (let i = pokemons_number_start_gen4; i <= end4; i++) {
 				await getPokemon(i);
 				if (i == pokemons_number_end_gen4) {
@@ -230,7 +236,7 @@ const fetchPokemons = async (genNumber = 1) => {
 				if (i == end4) stillLoading = false;
 				loadMorePokemons();
 			}
-
+			firstLoad = false;
 			pokemons_number_start_gen4 = pokemons_number_start_gen4 + load_number + 1;
 			end4 = end4 + load_number + 1;
 
@@ -239,7 +245,7 @@ const fetchPokemons = async (genNumber = 1) => {
 			break;
 
 		case 5:
-			load_number = 50;
+			load_number = 30;
 			for (let i = pokemons_number_start_gen5; i <= end5; i++) {
 				await getPokemon(i);
 				if (i == pokemons_number_end_gen5) {
@@ -249,7 +255,7 @@ const fetchPokemons = async (genNumber = 1) => {
 				if (i == end5) stillLoading = false;
 				loadMorePokemons();
 			}
-
+			firstLoad = false;
 			pokemons_number_start_gen5 = pokemons_number_start_gen5 + load_number + 1;
 			end5 = end5 + load_number + 1;
 
@@ -261,7 +267,6 @@ const fetchPokemons = async (genNumber = 1) => {
 };
 
 const getPokemon = async (id) => {
-	console.log("in getPokemon");
 	const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 	const res = await fetch(url);
 	const pokemon = await res.json();
@@ -269,7 +274,6 @@ const getPokemon = async (id) => {
 };
 
 function createPokemonCard(pokemon) {
-	console.log("in createpokemoncard");
 	const pokemonEl = document.createElement("li");
 	pokemonEl.classList.add("pokemon");
 
@@ -344,7 +348,6 @@ function loadingAnimation() {
 	loader.style.display = "block";
 	poke_container.style.display = "none";
 	loadMoreText.style.display = "none";
-	setTimeout(showPage, 1200);
 }
 
 function loadMorePokemons() {
@@ -355,9 +358,15 @@ function loadMorePokemons() {
 		loadMoreText.style.display = "flex";
 	} else {
 		//Still loading
-		loader.style.display = "block";
-		poke_container.style.display = "flex";
-		loadMoreText.style.display = "none";
+		if (firstLoad) {
+			loader.style.display = "block";
+			poke_container.style.display = "none";
+			loadMoreText.style.display = "none";
+		} else {
+			loader.style.display = "block";
+			poke_container.style.display = "flex";
+			loadMoreText.style.display = "none";
+		}
 	}
 }
 
@@ -377,12 +386,11 @@ function sleep(milliseconds) {
 
 $(window).scroll(function () {
 	if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
-		sleep(1500);
+		sleep(500);
 		if (!stillInSearch) {
-			if (!homepage) {
-				if (!stillLoading) {
-					fetchPokemons(current_gen);
-				}
+			if (!stillLoading) {
+				fetchPokemons(current_gen);
+				sleep(500);
 			}
 		}
 	}
