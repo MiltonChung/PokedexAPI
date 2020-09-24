@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./style.css" />
-		<link rel="stylesheet" href="./animations.css" />
-		<link rel="stylesheet" href="./randomPokemon.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+		<link rel="stylesheet" href="./css/animations.css" />
+		<link rel="stylesheet" href="./css/randomPokemon.css" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;1,300&display=swap"
 			rel="stylesheet"
@@ -17,55 +17,48 @@
 			src="https://kit.fontawesome.com/07e5ac0c0d.js"
 			crossorigin="anonymous"
 		></script>
-		<title>Pokedex | API</title>
+		<title>Pokedex | Random Pokemon Generator</title>
 	</head>
 	<body>
-		<nav>
-			<a class="title" href="/PokedexAPI">
-				<img
-					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
-				/>
-				<h1>PokeDex</h1>
-				<img
-					src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
-				/>
-			</a>
+		<div class="wrapper">
+			<nav>
+				<a class="title" href="/PokedexAPI">
+					<img
+						src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
+					/>
+					<h1>PokeDex</h1>
+					<img
+						src="https://cdn.iconscout.com/icon/free/png-512/pokemon-pokeball-game-go-34722.png"
+					/>
+				</a>
 
-			<ul>
-				<li>
-					<div class="randomPokemonGen">
-						<a href="./randomPokemonGenerator.html">Random Pokemon Generator</a>
-					</div>
-				</li>
-
-				
-			</ul>
-			<a class="menu__icon mobile"><span></span></a>
-			<ul class="menu mobile">
-				<li>
+				<ul>
 					<li>
-					<a href="./PokedexAPI" class="menu__item"
-						>Home</a
-					>
-				</li>
-					<a href="./randomPokemonGenerator.html" class="menu__item"
-						>Random Pokemon Generator</a
-					>
-				</li>
-				
-		</nav>
+						<div class="randomPokemonGen">
+							<a href="./randomPokemonGenerator.html"
+								>Random Pokemon Generator</a
+							>
+						</div>
+					</li>
+				</ul>
 
-		<div id="generatorBox"></div>
+				<!-- Mobile Hamburger Menu -->
+				<a class="mobileHamIcon mobile"><span></span></a>
+				<ul class="menu mobile">
+					<li>
+						<a href="./PokedexAPI" class="menuItem">Home</a>
+					</li>
+					<li>
+						<a href="./randomPokemonGenerator.html" class="menuItem"
+							>Random Pokemon Generator</a
+						>
+					</li>
+				</ul>
+			</nav>
 
-		<script src="./randomPokemon.js"></script>
+			<div id="generatorBox"></div>
+		</div>
+
+		<script src="./js/randomPokemon.js"></script>
 	</body>
 </html>
-
-<!-- <div class="imageLoader">
-        
-      </div>
-      <div class="randomButton">
-        <button>
-          Random Pokemon
-        </button>
-      </div> -->

@@ -417,7 +417,6 @@ function out(e) {
 
 	if (emptySearch && mouseSearch) {
 		loadMoreText.style.display = "flex";
-		console.log("OUT AND ABOUT");
 	}
 }
 

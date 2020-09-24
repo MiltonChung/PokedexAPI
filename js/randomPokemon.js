@@ -131,7 +131,7 @@ function assignColor(pokemonEl, color1, color2 = null) {
 }
 
 $(document).ready(function () {
-	$(".menu__icon").click(function () {
+	$(".mobileHamIcon").click(function () {
 		$("nav").toggleClass("menu_shown");
 	});
 });
