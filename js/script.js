@@ -34,6 +34,7 @@ let end5 = pokemons_number_start_gen5 + load_number;
 let current_gen = 1;
 let stillInSearch = false;
 let homepage = true;
+let stillLoading = true;
 const colors = {
 	fire: "#F08030",
 	grass: "#78C850",
@@ -60,10 +61,7 @@ const colors = {
 // Takes out the keys from the colors object
 const main_types = Object.keys(colors);
 
-function toggleMenu() {
-	nav.classList.toggle("menu_shown");
-}
-
+// Changes the generation when user clicks it from the nav bar
 function changeGen(genNumber) {
 	current_gen = genNumber;
 	clearStyle();
@@ -74,47 +72,42 @@ function changeGen(genNumber) {
 	switch (current_gen) {
 		case 1:
 			homepage = true;
-			gen1_dropdown.style.fontWeight = 700;
-			gen1_dropdown.style.background = "#cabbef";
-			gen1_m.style.fontWeight = 700;
-			gen1_m.style.background = "#cabbef";
+			applyStyle(gen1_dropdown);
+			applyStyle(gen1_m);
 			break;
 		case 2:
-			gen2_m.style.fontWeight = 700;
-			gen2_m.style.background = "#cabbef";
-			gen2_m.style.fontWeight = 700;
-			gen2_m.style.background = "#cabbef";
+			applyStyle(gen2_dropdown);
+			applyStyle(gen2_m);
 			break;
 		case 3:
-			gen3_dropdown.style.fontWeight = 700;
-			gen3_dropdown.style.background = "#cabbef";
-			gen3_m.style.fontWeight = 700;
-			gen3_m.style.background = "#cabbef";
+			applyStyle(gen3_dropdown);
+			applyStyle(gen3_m);
 			break;
 		case 4:
-			gen4_dropdown.style.fontWeight = 700;
-			gen4_dropdown.style.background = "#cabbef";
-			gen4_m.style.fontWeight = 700;
-			gen4_m.style.background = "#cabbef";
+			applyStyle(gen4_dropdown);
+			applyStyle(gen4_m);
 			break;
 		case 5:
-			gen5_dropdown.style.fontWeight = 700;
-			gen5_dropdown.style.background = "#cabbef";
-			gen5_m.style.fontWeight = 700;
-			gen5_m.style.background = "#cabbef";
+			applyStyle(gen5_dropdown);
+			applyStyle(gen5_m);
 			break;
 
 		default:
-			gen1_dropdown.style.fontWeight = 700;
-			gen1_dropdown.style.background = "#cabbef";
-			gen1_m.style.fontWeight = 700;
-			gen1_m.style.background = "#cabbef";
+			applyStyle(gen1_dropdown);
+			applyStyle(gen1_m);
 			break;
 	}
 
 	fetchPokemons(current_gen);
 }
 
+// Apply bold and purple background to the selected gen
+function applyStyle(pokemonGen) {
+	pokemonGen.style.fontWeight = 700;
+	pokemonGen.style.background = "#cabbef";
+}
+
+// Reset the generation menu
 function clearStyle() {
 	gen1_dropdown.style.fontWeight = 400;
 	gen1_dropdown.style.backgroundColor = "white";
@@ -142,10 +135,13 @@ function clearStyle() {
 	gen5_m.style.backgroundColor = "white";
 }
 
+// Clears poke_container to load other generations
 function clearPage() {
 	poke_container.innerHTML = "";
 }
 
+// Reserts the starting and end numbers for each generation
+// Used to load each generation from the start
 function resetStartAndEnd() {
 	pokemons_number_start_gen1 = 1;
 	pokemons_number_end_gen1 = 151;
@@ -157,7 +153,7 @@ function resetStartAndEnd() {
 	pokemons_number_end_gen4 = 493;
 	pokemons_number_start_gen5 = 494;
 	pokemons_number_end_gen5 = 649;
-	load_number = 30;
+	load_number = 50;
 	end1 = pokemons_number_start_gen1 + load_number;
 	end2 = pokemons_number_start_gen2 + load_number;
 	end3 = pokemons_number_start_gen3 + load_number;
@@ -166,6 +162,8 @@ function resetStartAndEnd() {
 }
 
 const fetchPokemons = async (genNumber = 1) => {
+	// Load all pokemon when in generation 1, other generations use the load more function
+	stillLoading = true;
 	switch (genNumber) {
 		case 1:
 			for (
@@ -174,29 +172,21 @@ const fetchPokemons = async (genNumber = 1) => {
 				i++
 			) {
 				await getPokemon(i);
-				// console.log("got: " + i);
+
+				if (i == pokemons_number_end_gen1) stillLoading = false;
+				loadMorePokemons();
 				loadMoreText.style.display = "none";
 			}
-			// for (let i = pokemons_number_start_gen1; i <= end1; i++) {
-			// 	await getPokemon(i);
-			// 	console.log("got: " + i);
-			// 	if (i == pokemons_number_end_gen1) {
-			// 		loadMoreText.style.display = "none";
-			// 	}
-			// }
-
-			// pokemons_number_start_gen1 = pokemons_number_start_gen1 + load_number + 1;
-			// end1 = end1 + load_number + 1;
-
-			// if (end1 >= pokemons_number_end_gen1) {
-			// 	end1 = pokemons_number_end_gen1;
-			// }
 			break;
+
 		case 2:
-			load_number = 30;
+			load_number = 50;
 			for (let i = pokemons_number_start_gen2; i <= end2; i++) {
 				await getPokemon(i);
-				console.log("got: " + i);
+				console.log("GETTING: " + i);
+
+				if (i == end2) stillLoading = false;
+				loadMorePokemons();
 				if (i == pokemons_number_end_gen2) {
 					loadMoreText.style.display = "none";
 				}
@@ -205,60 +195,65 @@ const fetchPokemons = async (genNumber = 1) => {
 			pokemons_number_start_gen2 = pokemons_number_start_gen2 + load_number + 1;
 			end2 = end2 + load_number + 1;
 
-			if (end2 >= pokemons_number_end_gen2) {
-				end2 = pokemons_number_end_gen2;
-			}
+			if (end2 >= pokemons_number_end_gen2) end2 = pokemons_number_end_gen2;
+
 			break;
+
 		case 3:
-			load_number = 30;
+			load_number = 50;
 			for (let i = pokemons_number_start_gen3; i <= end3; i++) {
 				await getPokemon(i);
-				console.log("got: " + i);
+				console.log("GETTING: " + i);
 				if (i == pokemons_number_end_gen3) {
 					loadMoreText.style.display = "none";
+					stillLoading = false;
 				}
+				if (i == end3) stillLoading = false;
+				loadMorePokemons();
 			}
 
 			pokemons_number_start_gen3 = pokemons_number_start_gen3 + load_number + 1;
 			end3 = end3 + load_number + 1;
 
-			if (end3 >= pokemons_number_end_gen3) {
-				end3 = pokemons_number_end_gen3;
-			}
+			if (end3 >= pokemons_number_end_gen3) end3 = pokemons_number_end_gen3;
+
 			break;
+
 		case 4:
-			load_number = 30;
+			load_number = 50;
 			for (let i = pokemons_number_start_gen4; i <= end4; i++) {
 				await getPokemon(i);
-				console.log("got: " + i);
 				if (i == pokemons_number_end_gen4) {
 					loadMoreText.style.display = "none";
+					stillLoading = false;
 				}
+				if (i == end4) stillLoading = false;
+				loadMorePokemons();
 			}
 
 			pokemons_number_start_gen4 = pokemons_number_start_gen4 + load_number + 1;
 			end4 = end4 + load_number + 1;
 
-			if (end4 >= pokemons_number_end_gen4) {
-				end4 = pokemons_number_end_gen4;
-			}
+			if (end4 >= pokemons_number_end_gen4) end4 = pokemons_number_end_gen4;
+
 			break;
+
 		case 5:
-			load_number = 30;
+			load_number = 50;
 			for (let i = pokemons_number_start_gen5; i <= end5; i++) {
 				await getPokemon(i);
-				console.log("got: " + i);
 				if (i == pokemons_number_end_gen5) {
 					loadMoreText.style.display = "none";
+					stillLoading = false;
 				}
+				if (i == end5) stillLoading = false;
+				loadMorePokemons();
 			}
 
 			pokemons_number_start_gen5 = pokemons_number_start_gen5 + load_number + 1;
 			end5 = end5 + load_number + 1;
 
-			if (end5 >= pokemons_number_end_gen5) {
-				end5 = pokemons_number_end_gen5;
-			}
+			if (end5 >= pokemons_number_end_gen5) end5 = pokemons_number_end_gen5;
 			break;
 		default:
 			break;
@@ -266,6 +261,7 @@ const fetchPokemons = async (genNumber = 1) => {
 };
 
 const getPokemon = async (id) => {
+	console.log("in getPokemon");
 	const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 	const res = await fetch(url);
 	const pokemon = await res.json();
@@ -273,6 +269,7 @@ const getPokemon = async (id) => {
 };
 
 function createPokemonCard(pokemon) {
+	console.log("in createpokemoncard");
 	const pokemonEl = document.createElement("li");
 	pokemonEl.classList.add("pokemon");
 
@@ -304,31 +301,29 @@ function createPokemonCard(pokemon) {
 
 	pokemonEl.appendChild(flipEl);
 	const pokeInnerHtml = `
-	 
-        <div class="flip-card-front" >
-          <div class="img-container">
-            <img src="${pokemon.sprites.other.dream_world.front_default}" />
-          </div>
-          <div class="info">
-            <span class="number" id="number">#${pokemon.id
-							.toString()
-							.padStart(3, "0")}</span>
-            <h3 class="name" id="name">${name}</h3>
-            <small class="type"> ${typePlural}: <span>${types}</span></small>
-          </div>
-        </div>
-
-				<div class="flip-card-back">
-					<h2>Stats:</h2>
-					<ul class="stats">
-						<li><span>HP:</span> ${pokemon.stats[0].base_stat}</li>
-						<li><span>Attack:</span> ${pokemon.stats[1].base_stat}</li>
-						<li><span>Defense:</span> ${pokemon.stats[2].base_stat}</li>
-						<li><span>Special Attack:</span> ${pokemon.stats[3].base_stat}</li>
-						<li><span>Special Defense:</span> ${pokemon.stats[4].base_stat}</li>
-						<li><span>Speed:</span> ${pokemon.stats[5].base_stat}</li>
-					</ul>
-				</div>
+    <div class="flip-card-front" >
+      <div class="img-container">
+        <img src="${pokemon.sprites.other.dream_world.front_default}" />
+      </div>
+      <div class="info">
+        <span class="number" id="number">#${pokemon.id
+					.toString()
+					.padStart(3, "0")}</span>
+        <h3 class="name" id="name">${name}</h3>
+        <small class="type"> ${typePlural}: <span>${types}</span></small>
+      </div>
+    </div>
+		<div class="flip-card-back">
+			<h2>Stats:</h2>
+			<ul class="stats">
+				<li><span>HP:</span> ${pokemon.stats[0].base_stat}</li>
+				<li><span>Attack:</span> ${pokemon.stats[1].base_stat}</li>
+				<li><span>Defense:</span> ${pokemon.stats[2].base_stat}</li>
+				<li><span>Special Attack:</span> ${pokemon.stats[3].base_stat}</li>
+				<li><span>Special Defense:</span> ${pokemon.stats[4].base_stat}</li>
+				<li><span>Speed:</span> ${pokemon.stats[5].base_stat}</li>
+			</ul>
+		</div>
   `;
 	flipEl.innerHTML = pokeInnerHtml;
 	poke_container.appendChild(pokemonEl);
@@ -352,6 +347,20 @@ function loadingAnimation() {
 	setTimeout(showPage, 1200);
 }
 
+function loadMorePokemons() {
+	if (!stillLoading) {
+		//Done Loading
+		poke_container.style.display = "flex";
+		loader.style.display = "none";
+		loadMoreText.style.display = "flex";
+	} else {
+		//Still loading
+		loader.style.display = "block";
+		poke_container.style.display = "flex";
+		loadMoreText.style.display = "none";
+	}
+}
+
 function showPage() {
 	loader.style.display = "none";
 	poke_container.style.display = "flex";
@@ -371,7 +380,9 @@ $(window).scroll(function () {
 		sleep(1500);
 		if (!stillInSearch) {
 			if (!homepage) {
-				fetchPokemons(current_gen);
+				if (!stillLoading) {
+					fetchPokemons(current_gen);
+				}
 			}
 		}
 	}
@@ -393,6 +404,7 @@ $(document).ready(function () {
 	});
 });
 
+// ============================= SEARCH FUNCTIONALITY ========================================
 const search = document.getElementById("searchText");
 const searchMobile = document.getElementById("searchTextMobile");
 let emptySearch = true;
@@ -447,15 +459,19 @@ function searchItem(e) {
 			}
 		}
 	}
-	let searchResult = [];
 
+	let searchResult = [];
+	// After each keyup, push 'true' into the array if there are cards still showing
+	// Used to check and display no results found text if no results were found
 	for (let i = 0; i < items.length; i++) {
 		if (getComputedStyle(items[i]).display == "none") {
 		} else if (getComputedStyle(items[i]).display == "block") {
 			searchResult.push("true");
 		}
 	}
+
 	noResults.classList.remove("showNoResults");
+	// Show no reseults found text when there's no true in the array
 	if (!searchResult.includes("true")) {
 		noResults.classList.add("showNoResults");
 	}
